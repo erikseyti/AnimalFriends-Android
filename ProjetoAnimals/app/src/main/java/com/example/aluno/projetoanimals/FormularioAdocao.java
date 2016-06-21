@@ -113,7 +113,9 @@ public class FormularioAdocao extends AppCompatActivity {
         adocao.setIdade(Integer.parseInt(editIdade.getText().toString()));
         adocao.setPeso(Double.parseDouble(editPeso.getText().toString()));
 
-
+        passarDadosWebService(adocao.getNome(),adocao.getDescricao(),adocao.getInformacaoContato(),adocao.getCpfAnunciante(),
+                adocao.getNomeAnunciante(),adocao.getEspecie(),adocao.getSexo(),adocao.getPorte(),adocao.getRaca(),adocao.getCastrado(),
+                adocao.getLinkVideo(),adocao.getCidade(),adocao.getIdade(),adocao.getPeso(),adocao.getPelagem());
         //inserir o cadastro da adoção no banco
         adocao.save();
 
@@ -122,12 +124,15 @@ public class FormularioAdocao extends AppCompatActivity {
         finish();
     }
 
-    private void passarDadosWebService(String nome, String descricao, String informacao){
+    private void passarDadosWebService(String nome, String descricao, String informacao,String cpf, String nomeAnunciante,String especie,
+     String sexo,String porte,String raca, String castrado, String linkVideo, String cidade, Integer idade, Double peso,String pelagem ){
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
         String myurl = "http://172.17.250.240:8080/ServicoWeb/resource/WebService/add";
-        String POST_PARAMS = "Nome="+nome+"Descrição="+descricao+"Informações de Contato"+informacao;
+        String POST_PARAMS = "Nome ="+nome+"Descrição ="+descricao+"Informações de Contato ="+informacao+"CPF do Anunciante ="+cpf
+                +"Nome do Anunciante ="+nomeAnunciante+"Especie ="+ especie +"Sexo ="+sexo+"Porte ="+porte +"Raca ="+raca+"Castrado ="+
+                castrado+"Link Video ="+linkVideo+"Cidade ="+cidade+"Idade ="+idade+"Peso ="+peso+"pelagem"+pelagem;
         try {
             URL url = new URL(myurl);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();

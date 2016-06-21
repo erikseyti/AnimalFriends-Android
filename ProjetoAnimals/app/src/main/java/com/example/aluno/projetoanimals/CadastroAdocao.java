@@ -35,33 +35,7 @@ public class CadastroAdocao extends AppCompatActivity {
         });
     }
 
-    private void passarDadosWebService(String name, int age){
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
 
-        String myurl = "http://172.17.250.240:8080/ServicoWeb/resource/WebService/add";
-        String POST_PARAMS = "name="+name+"&age="+age;
-        try {
-            URL url = new URL(myurl);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setReadTimeout(10000 /* milliseconds */);
-            conn.setConnectTimeout(15000 /* milliseconds */);
-            conn.setRequestMethod("POST");
-            conn.setDoInput(true);
-
-            OutputStream os = conn.getOutputStream();
-            os.write(POST_PARAMS.getBytes());
-            os.flush();
-            os.close();
-
-            conn.connect();
-            int response = conn.getResponseCode();
-            Log.i("MainActivity", "The response is: " + response);
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
 
     public void chamarAdocao (View view)
     {
