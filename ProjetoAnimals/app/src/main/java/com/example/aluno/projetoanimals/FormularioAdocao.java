@@ -40,10 +40,22 @@ public class FormularioAdocao extends AppCompatActivity {
         EditText editNome = (EditText) findViewById(R.id.editNome);
         EditText editDesc = (EditText) findViewById(R.id.editDescricao);
         EditText editInform = (EditText) findViewById(R.id.editInformacoesContatoA);
+        EditText editCPF =(EditText) findViewById(R.id.editCPFAnunciante);
+        EditText editNomeAn =(EditText) findViewById(R.id.editNomeAnunciante);
+        EditText editEspecie =(EditText) findViewById(R.id.editEspecie);
+        EditText editSexo =(EditText) findViewById(R.id.editSexo);
+        EditText editPorte = (EditText) findViewById(R.id.editPorte);
+        
 
         editNome.setText(adocao.getNome());
         editDesc.setText(adocao.getDescricao());
         editInform.setText(adocao.getInformacaoContato());
+        editCPF.setText(adocao.getCpfAnunciante());
+        editNomeAn.setText(adocao.getNomeAnunciante());
+        editEspecie.setText(adocao.getEspecie());
+        editSexo.setText(adocao.getSexo());
+        editPorte.setText(adocao.getPorte());
+
 
         // como ja existe uma adoção no banco, é necessario habilitar o botão de excluir
         //que neste momento esta desabilitado
@@ -98,12 +110,12 @@ public class FormularioAdocao extends AppCompatActivity {
         finish();
     }
 
-    private void passarDadosWebService(String name, int age){
+    private void passarDadosWebService(String nome, String descricao, String informacao){
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
         String myurl = "http://172.17.250.240:8080/ServicoWeb/resource/WebService/add";
-        String POST_PARAMS = "name="+name+"&age="+age;
+        String POST_PARAMS = "Nome="+nome+"Descrição="+descricao+"Informações de Contato"+informacao;
         try {
             URL url = new URL(myurl);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
