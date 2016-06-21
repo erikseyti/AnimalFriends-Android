@@ -34,7 +34,7 @@ public class FormularioAdocao extends AppCompatActivity {
             setarDadosAdocao();
         }
     }
-
+    // este metodo serve para preencher os dados do formulario com os dados salvos dentro do Banco de Dados do Android
     private void setarDadosAdocao()
     {
         EditText editNome = (EditText) findViewById(R.id.editNome);
@@ -45,7 +45,11 @@ public class FormularioAdocao extends AppCompatActivity {
         EditText editEspecie =(EditText) findViewById(R.id.editEspecie);
         EditText editSexo =(EditText) findViewById(R.id.editSexo);
         EditText editPorte = (EditText) findViewById(R.id.editPorte);
-        
+        EditText editPelagem = (EditText) findViewById(R.id.editPelagem);
+        EditText editRaca = (EditText) findViewById(R.id.editRaca);
+        EditText editCastrado = (EditText) findViewById(R.id.editCastrado);
+        EditText editLinkVideo = (EditText) findViewById(R.id.editLinkVideos);
+        EditText editCidade = (EditText) findViewById(R.id.editCidade);
 
         editNome.setText(adocao.getNome());
         editDesc.setText(adocao.getDescricao());
@@ -55,7 +59,11 @@ public class FormularioAdocao extends AppCompatActivity {
         editEspecie.setText(adocao.getEspecie());
         editSexo.setText(adocao.getSexo());
         editPorte.setText(adocao.getPorte());
-
+        editPelagem.setText(adocao.getPelagem());
+        editRaca.setText(adocao.getRaca());
+        editCastrado.setText(adocao.getCastrado());
+        editLinkVideo.setText(adocao.getLinkVideo());
+        editCidade.setText(adocao.getCidade());
 
         // como ja existe uma adoção no banco, é necessario habilitar o botão de excluir
         //que neste momento esta desabilitado
