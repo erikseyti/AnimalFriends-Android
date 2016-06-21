@@ -50,6 +50,8 @@ public class FormularioAdocao extends AppCompatActivity {
         EditText editCastrado = (EditText) findViewById(R.id.editCastrado);
         EditText editLinkVideo = (EditText) findViewById(R.id.editLinkVideos);
         EditText editCidade = (EditText) findViewById(R.id.editCidade);
+        EditText editPeso = (EditText) findViewById(R.id.editPeso);
+        EditText editIdade = (EditText) findViewById(R.id.editIdade);
 
         editNome.setText(adocao.getNome());
         editDesc.setText(adocao.getDescricao());
@@ -64,6 +66,8 @@ public class FormularioAdocao extends AppCompatActivity {
         editCastrado.setText(adocao.getCastrado());
         editLinkVideo.setText(adocao.getLinkVideo());
         editCidade.setText(adocao.getCidade());
+        editPeso.setText(String.valueOf(adocao.getPeso()));
+        editIdade.setText(String.valueOf(adocao.getIdade()));
 
         // como ja existe uma adoção no banco, é necessario habilitar o botão de excluir
         //que neste momento esta desabilitado

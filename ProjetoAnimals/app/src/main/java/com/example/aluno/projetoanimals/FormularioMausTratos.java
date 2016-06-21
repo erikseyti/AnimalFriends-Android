@@ -37,10 +37,14 @@ public class FormularioMausTratos extends AppCompatActivity {
         EditText editDescAnimal = (EditText) findViewById(R.id.editDescricaoAnimal);
         EditText editInformacoes = (EditText) findViewById(R.id.editInformacoesContatoMT);
         EditText editCidade =(EditText) findViewById(R.id.editCidade);
+        EditText editLatitude = (EditText) findViewById(R.id.editLatitude);
+        EditText editLongitude = (EditText) findViewById(R.id.editLongitude);
 
         editDescAnimal.setText(mausTratos.getDescricaoAnimal());
         editInformacoes.setText(mausTratos.getInformacoesContato());
         editCidade.setText(mausTratos.getCidade());
+        editLatitude.setText(String.valueOf(mausTratos.getLatitude()));
+        editLongitude.setText(String.valueOf(mausTratos.getLongitude()));
 
         // como ja existe uma Denuncia de Maus Tratos no banco, é necessario habilitar o botão de excluir
         //que neste momento esta desabilitado
