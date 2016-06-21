@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">ProjetoAnimals</string>
+    <string name="action_settings">Settings</string>
+    <string name="btn_cadastro_adocao">Cadastro de Adoção</string>
+    <string name="btn_cadastro_maus_tratos">Cadastro de Maus Tratos</string>
+    <string name="btn_nova_adocao">Nova Adoção</string>
+    <string name="btn_novo_maus_tratos">Nova Denuncia de Maus Tratos</string>
+    <string name="title_activity_cadastro_adocao">CadastroAdocao</string>
+    <string name="title_activity_cadastro_maus_tratos">CadastroMausTratos</string>
+
+</resources>
