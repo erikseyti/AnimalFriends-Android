@@ -75,7 +75,8 @@ public class FormularioMausTratos extends AppCompatActivity {
         mausTratos.setLongitude(Double.parseDouble(editLongitude.getText().toString()));
 
         //inserir o cadastro de maus tratos no banco
-        passarDadosWebService(mausTratos.getDescricaoAnimal(),mausTratos.getCidade(),mausTratos.getInformacoesContato(), mausTratos.getLatitude(),mausTratos.getLongitude());
+      /*  passarDadosWebService(mausTratos.getDescricaoAnimal(),mausTratos.getCidade(),mausTratos.getInformacoesContato(), mausTratos.getLatitude(),mausTratos.getLongitude());*/
+        testePassarDadosWebService(mausTratos.getDescricaoAnimal());
         mausTratos.save();
 
         //finaliza a activity de formulario de maus tratos e volta para a lista de maus tratos
@@ -88,6 +89,34 @@ public class FormularioMausTratos extends AppCompatActivity {
         // mudar o numero da maquina local: 172.17.250.240, para o numero da maquina executada
         String myurl = "http://172.17.250.240:8080/ServicoWeb/resource/WebService/add";
         String POST_PARAMS = "Descrição ="+descricao+"Cidade ="+cidade+"Informação ="+informacao+"Latitude"+latitude+"Longitude"+longitude;
+        try {
+            URL url = new URL(myurl);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setReadTimeout(10000 /* milliseconds */);
+            conn.setConnectTimeout(15000 /* milliseconds */);
+            conn.setRequestMethod("POST");
+            conn.setDoInput(true);
+
+            OutputStream os = conn.getOutputStream();
+            os.write(POST_PARAMS.getBytes());
+            os.flush();
+            os.close();
+
+            conn.connect();
+            int response = conn.getResponseCode();
+            Log.i("MainActivity", "The response is: " + response);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    private void testePassarDadosWebService(String descricaoAnimal){
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        // mudar o numero da maquina local: 172.17.250.240, para o numero da maquina executada
+        String myurl = "http://192.168.0.109:8081/ServicoWeb/resource/WebService/addMausTratos";
+        String POST_PARAMS = "descricaoAnimal ="+descricaoAnimal;
         try {
             URL url = new URL(myurl);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();

@@ -113,9 +113,9 @@ public class FormularioAdocao extends AppCompatActivity {
         adocao.setIdade(Integer.parseInt(editIdade.getText().toString()));
         adocao.setPeso(Double.parseDouble(editPeso.getText().toString()));
 
-        passarDadosWebService(adocao.getNome(),adocao.getDescricao(),adocao.getInformacaoContato(),adocao.getCpfAnunciante(),
+      /*  passarDadosWebService(adocao.getNome(),adocao.getDescricao(),adocao.getInformacaoContato(),adocao.getCpfAnunciante(),
                 adocao.getNomeAnunciante(),adocao.getEspecie(),adocao.getSexo(),adocao.getPorte(),adocao.getRaca(),adocao.getCastrado(),
-                adocao.getLinkVideo(),adocao.getCidade(),adocao.getIdade(),adocao.getPeso(),adocao.getPelagem());
+                adocao.getLinkVideo(),adocao.getCidade(),adocao.getIdade(),adocao.getPeso(),adocao.getPelagem());*/
         //inserir o cadastro da adoção no banco
         adocao.save();
 
