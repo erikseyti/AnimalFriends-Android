@@ -113,10 +113,11 @@ public class FormularioAdocao extends AppCompatActivity {
         adocao.setIdade(Integer.parseInt(editIdade.getText().toString()));
         adocao.setPeso(Double.parseDouble(editPeso.getText().toString()));
 
-      /*  passarDadosWebService(adocao.getNome(),adocao.getDescricao(),adocao.getInformacaoContato(),adocao.getCpfAnunciante(),
+        passarDadosWebService(adocao.getNome(),adocao.getDescricao(),adocao.getInformacaoContato(),adocao.getCpfAnunciante(),
                 adocao.getNomeAnunciante(),adocao.getEspecie(),adocao.getSexo(),adocao.getPorte(),adocao.getRaca(),adocao.getCastrado(),
-                adocao.getLinkVideo(),adocao.getCidade(),adocao.getIdade(),adocao.getPeso(),adocao.getPelagem());*/
+                adocao.getLinkVideo(),adocao.getCidade(),adocao.getIdade(),adocao.getPeso(),adocao.getPelagem());
         //inserir o cadastro da adoção no banco
+
         adocao.save();
 
 
@@ -129,10 +130,10 @@ public class FormularioAdocao extends AppCompatActivity {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        String myurl = "http://172.17.250.240:8080/ServicoWeb/resource/WebService/add";
-        String POST_PARAMS = "Nome ="+nome+"Descrição ="+descricao+"Informações de Contato ="+informacao+"CPF do Anunciante ="+cpf
-                +"Nome do Anunciante ="+nomeAnunciante+"Especie ="+ especie +"Sexo ="+sexo+"Porte ="+porte +"Raca ="+raca+"Castrado ="+
-                castrado+"Link Video ="+linkVideo+"Cidade ="+cidade+"Idade ="+idade+"Peso ="+peso+"pelagem"+pelagem;
+        String myurl = "http://192.168.0.109:8081/ServicoWeb/resource/WebService/addAdocao";
+        String POST_PARAMS = "nome="+nome+"&descricao="+descricao+"&informacao="+informacao+"&cpf="+cpf
+                +"&nomeAnunciante="+nomeAnunciante+"&especie="+ especie +"&sexo="+sexo+"&porte="+porte +"&raca="+raca+"&castrado="+
+                castrado+"&linkVideo="+linkVideo+"&cidade="+cidade+"&idade="+idade+"&peso="+peso+"&pelagem="+pelagem;
         try {
             URL url = new URL(myurl);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();

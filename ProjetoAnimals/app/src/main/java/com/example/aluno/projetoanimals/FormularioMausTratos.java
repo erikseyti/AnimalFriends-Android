@@ -40,6 +40,7 @@ public class FormularioMausTratos extends AppCompatActivity {
 
     private void setarDadosMausTratos()
     {
+
         EditText editDescAnimal = (EditText) findViewById(R.id.editDescricaoAnimal);
         EditText editInformacoes = (EditText) findViewById(R.id.editInformacoesContatoMT);
         EditText editCidade =(EditText) findViewById(R.id.editCidade);
@@ -76,7 +77,8 @@ public class FormularioMausTratos extends AppCompatActivity {
 
         //inserir o cadastro de maus tratos no banco
       /*  passarDadosWebService(mausTratos.getDescricaoAnimal(),mausTratos.getCidade(),mausTratos.getInformacoesContato(), mausTratos.getLatitude(),mausTratos.getLongitude());*/
-        testePassarDadosWebService(mausTratos.getDescricaoAnimal());
+        passarDadosWebService(mausTratos.getDescricaoAnimal(),mausTratos.getCidade(),mausTratos.getInformacoesContato(),
+                mausTratos.getLatitude(),mausTratos.getLongitude());
         mausTratos.save();
 
         //finaliza a activity de formulario de maus tratos e volta para a lista de maus tratos
@@ -87,8 +89,9 @@ public class FormularioMausTratos extends AppCompatActivity {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         // mudar o numero da maquina local: 172.17.250.240, para o numero da maquina executada
-        String myurl = "http://172.17.250.240:8080/ServicoWeb/resource/WebService/add";
-        String POST_PARAMS = "Descrição ="+descricao+"Cidade ="+cidade+"Informação ="+informacao+"Latitude"+latitude+"Longitude"+longitude;
+        String myurl = "http://192.168.0.109:8081/ServicoWeb/resource/WebService/addMausTratos";
+        String POST_PARAMS = "descricao="+descricao+"&cidade="+cidade+"&informacao="+informacao+"&latitude="+latitude+"&longitude="+longitude;
+        //deixar o nome dos parametros iguais tanto no web service como no java pra passa-los
         try {
             URL url = new URL(myurl);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -111,12 +114,12 @@ public class FormularioMausTratos extends AppCompatActivity {
         }
     }
 
-    private void testePassarDadosWebService(String descricaoAnimal){
+    private void testePassarDadosWebService(String descricao){
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         // mudar o numero da maquina local: 172.17.250.240, para o numero da maquina executada
         String myurl = "http://192.168.0.109:8081/ServicoWeb/resource/WebService/addMausTratos";
-        String POST_PARAMS = "descricaoAnimal ="+descricaoAnimal;
+        String POST_PARAMS = "descricao="+descricao;
         try {
             URL url = new URL(myurl);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
