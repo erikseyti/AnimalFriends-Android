@@ -3,17 +3,19 @@ package com.example.aluno.projetoanimals;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.aluno.projetoanimals.modelo.Adocao;
 
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Date;
+
 
 public class FormularioAdocao extends AppCompatActivity {
     Adocao adocao = new Adocao();
@@ -52,6 +54,7 @@ public class FormularioAdocao extends AppCompatActivity {
         EditText editCidade = (EditText) findViewById(R.id.editCidade);
         EditText editPeso = (EditText) findViewById(R.id.editPeso);
         EditText editIdade = (EditText) findViewById(R.id.editIdade);
+        EditText editDataCadastro =(EditText) findViewById(R.id.editDataCadastro);
 
         editNome.setText(adocao.getNome());
         editDesc.setText(adocao.getDescricao());
@@ -68,6 +71,7 @@ public class FormularioAdocao extends AppCompatActivity {
         editCidade.setText(adocao.getCidade());
         editPeso.setText(String.valueOf(adocao.getPeso()));
         editIdade.setText(String.valueOf(adocao.getIdade()));
+        editDataCadastro.setText(adocao.getDataCadastro());
 
         // como ja existe uma adoção no banco, é necessario habilitar o botão de excluir
         //que neste momento esta desabilitado
@@ -96,44 +100,65 @@ public class FormularioAdocao extends AppCompatActivity {
         EditText editIdade=( EditText) findViewById(R.id.editIdade);
         EditText editDataCadastro =(EditText) findViewById(R.id.editDataCadastro);
 
+        String nomeAnunc = editNomeAnun.getText().toString();
+        String informacaoContato = editInform.getText().toString();
+        String descricaoAnimal = editDesc.getText().toString();
 
-        adocao.setNome(editNome.getText().toString());
-        adocao.setDescricao(editDesc.getText().toString());
-        adocao.setInformacaoContato(editInform.getText().toString());
-        adocao.setCpfAnunciante(editCpfAnunciante.getText().toString());
-        adocao.setNomeAnunciante(editNomeAnun.getText().toString());
-        adocao.setEspecie(editEspeci.getText().toString());
-        adocao.setSexo(editSexo.getText().toString());
-        adocao.setPorte(editPorte.getText().toString());
-        adocao.setPelagem(editPelagem.getText().toString());
-        adocao.setRaca(editRaca.getText().toString());
-        adocao.setCastrado(editCastrad.getText().toString());
-        adocao.setLinkVideo(editLink.getText().toString());
-        adocao.setCidade(editCidade.getText().toString());
-        adocao.setIdade(Integer.parseInt(editIdade.getText().toString()));
-        adocao.setPeso(Double.parseDouble(editPeso.getText().toString()));
+         if (TextUtils.isEmpty(nomeAnunc)) {
+            editNomeAnun.setError("Informe o Nome do Anunciante");
+            editNomeAnun.requestFocus();
+            return;
+        } else if (TextUtils.isEmpty(informacaoContato)) {
+            editInform.setError("Informe as Informações de Contato");
+            editInform.requestFocus();
+            return;
+        } else if (TextUtils.isEmpty(descricaoAnimal)) {
+            editDesc.setError("Informe a Descrição do Animal");
+            editDesc.requestFocus();
+            return;
+        }
+        else {
+             Adocao adocao = new Adocao();
 
-        passarDadosWebService(adocao.getNome(),adocao.getDescricao(),adocao.getInformacaoContato(),adocao.getCpfAnunciante(),
-                adocao.getNomeAnunciante(),adocao.getEspecie(),adocao.getSexo(),adocao.getPorte(),adocao.getRaca(),adocao.getCastrado(),
-                adocao.getLinkVideo(),adocao.getCidade(),adocao.getIdade(),adocao.getPeso(),adocao.getPelagem());
-        //inserir o cadastro da adoção no banco
+             adocao.setNome(editNome.getText().toString());
+             adocao.setDescricao(editDesc.getText().toString());
+             adocao.setInformacaoContato(editInform.getText().toString());
+             adocao.setCpfAnunciante(editCpfAnunciante.getText().toString());
+             adocao.setNomeAnunciante(editNomeAnun.getText().toString());
+             adocao.setEspecie(editEspeci.getText().toString());
+             adocao.setSexo(editSexo.getText().toString());
+             adocao.setPorte(editPorte.getText().toString());
+             adocao.setPelagem(editPelagem.getText().toString());
+             adocao.setRaca(editRaca.getText().toString());
+             adocao.setCastrado(editCastrad.getText().toString());
+             adocao.setLinkVideo(editLink.getText().toString());
+             adocao.setCidade(editCidade.getText().toString());
+             adocao.setIdade(Integer.parseInt(editIdade.getText().toString()));
+             adocao.setPeso(Double.parseDouble(editPeso.getText().toString()));
+             adocao.setDataCadastro(editDataCadastro.getText().toString());
 
-        adocao.save();
+             passarDadosWebService(adocao.getNome(), adocao.getDescricao(), adocao.getInformacaoContato(), adocao.getCpfAnunciante(),
+                     adocao.getNomeAnunciante(), adocao.getEspecie(), adocao.getSexo(), adocao.getPorte(), adocao.getRaca(), adocao.getCastrado(),
+                     adocao.getLinkVideo(), adocao.getCidade(), adocao.getIdade(), adocao.getPeso(), adocao.getPelagem(), adocao.getDataCadastro());
+             //inserir o cadastro da adoção no banco
 
+             adocao.save();
 
-        //finaliza a activity de formulario de adoções e volta para a lista de adoções
-        finish();
+             //finaliza a activity de formulario de adoções e volta para a lista de adoções
+             finish();
+         }
     }
 
     private void passarDadosWebService(String nome, String descricao, String informacao,String cpf, String nomeAnunciante,String especie,
-     String sexo,String porte,String raca, String castrado, String linkVideo, String cidade, Integer idade, Double peso,String pelagem ){
+     String sexo,String porte,String raca, String castrado, String linkVideo, String cidade, Integer idade, Double peso,String pelagem,
+                                       String dataCadastro){
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        String myurl = "http://192.168.0.109:8081/ServicoWeb/resource/WebService/addAdocao";
+        String myurl = "http://172.17.241.67:8081/ServicoWeb/resource/WebService/addAdocao";
         String POST_PARAMS = "nome="+nome+"&descricao="+descricao+"&informacao="+informacao+"&cpf="+cpf
                 +"&nomeAnunciante="+nomeAnunciante+"&especie="+ especie +"&sexo="+sexo+"&porte="+porte +"&raca="+raca+"&castrado="+
-                castrado+"&linkVideo="+linkVideo+"&cidade="+cidade+"&idade="+idade+"&peso="+peso+"&pelagem="+pelagem;
+                castrado+"&linkVideo="+linkVideo+"&cidade="+cidade+"&idade="+idade+"&peso="+peso+"&pelagem="+pelagem+"&dataCadastro="+dataCadastro;
         try {
             URL url = new URL(myurl);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();

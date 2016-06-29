@@ -22,7 +22,7 @@ public class Adocao extends SugarRecord {
     private String raca;
     private String castrado;
     private String linkVideo;
-    private Date dataCadastro;// não esta sendo utilizado
+    private String dataCadastro;
     private String cidade;
 
     public Adocao() {
@@ -140,11 +140,11 @@ public class Adocao extends SugarRecord {
         this.linkVideo = linkVideo;
     }
 
-    public Date getDataCadastro() {
+    public String getDataCadastro() {
         return dataCadastro;
     }
 
-    public void setDataCadastro(Date dataCadastro) {
+    public void setDataCadastro(String dataCadastro) {
         this.dataCadastro = dataCadastro;
     }
 
