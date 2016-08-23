@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void cadastroAdocao(View view){
-        Intent intent=new Intent(this, CadastroAdocao.class);
+        Intent intent= new Intent(this,CadastroAdocao.class);
         startActivity(intent);
     }
 

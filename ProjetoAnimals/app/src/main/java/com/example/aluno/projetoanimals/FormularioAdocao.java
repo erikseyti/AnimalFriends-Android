@@ -1,5 +1,7 @@
 package com.example.aluno.projetoanimals;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.aluno.projetoanimals.modelo.Adocao;
@@ -118,7 +121,7 @@ public class FormularioAdocao extends AppCompatActivity {
             return;
         }
         else {
-             Adocao adocao = new Adocao();
+
 
              adocao.setNome(editNome.getText().toString());
              adocao.setDescricao(editDesc.getText().toString());
@@ -137,9 +140,9 @@ public class FormularioAdocao extends AppCompatActivity {
              adocao.setPeso(Double.parseDouble(editPeso.getText().toString()));
              adocao.setDataCadastro(editDataCadastro.getText().toString());
 
-             passarDadosWebService(adocao.getNome(), adocao.getDescricao(), adocao.getInformacaoContato(), adocao.getCpfAnunciante(),
-                     adocao.getNomeAnunciante(), adocao.getEspecie(), adocao.getSexo(), adocao.getPorte(), adocao.getRaca(), adocao.getCastrado(),
-                     adocao.getLinkVideo(), adocao.getCidade(), adocao.getIdade(), adocao.getPeso(), adocao.getPelagem(), adocao.getDataCadastro());
+           //  passarDadosWebService(adocao.getNome(), adocao.getDescricao(), adocao.getInformacaoContato(), adocao.getCpfAnunciante(),
+             //        adocao.getNomeAnunciante(), adocao.getEspecie(), adocao.getSexo(), adocao.getPorte(), adocao.getRaca(), adocao.getCastrado(),
+               //      adocao.getLinkVideo(), adocao.getCidade(), adocao.getIdade(), adocao.getPeso(), adocao.getPelagem(), adocao.getDataCadastro());
              //inserir o cadastro da adoção no banco
 
              adocao.save();
@@ -187,6 +190,28 @@ public class FormularioAdocao extends AppCompatActivity {
         adocao.delete();
         //fechar a activity
         finish();
+    }
+
+    public void tirarFoto(View view)
+    {
+        Intent it = new Intent("android.media.action.IMAGE_CAPTURE");
+        startActivityForResult(it, 0);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode,int resultCode, Intent data)
+    {
+        if(data != null)
+        {
+            Bundle bundle= data.getExtras();
+            if(bundle!=null)
+            {
+                Bitmap img= (Bitmap) bundle.get("data");
+
+                ImageView iv = (ImageView) findViewById(R.id.imageViewAdocao);
+                iv.setImageBitmap(img);
+            }
+        }
     }
 
 }

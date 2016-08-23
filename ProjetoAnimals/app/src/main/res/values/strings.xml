@@ -7,5 +7,6 @@
     <string name="btn_novo_maus_tratos">Nova Denuncia de Maus Tratos</string>
     <string name="title_activity_cadastro_adocao">CadastroAdocao</string>
     <string name="title_activity_cadastro_maus_tratos">CadastroMausTratos</string>
+    <string name="btn_camera">Tirar Foto</string>
 
 </resources>

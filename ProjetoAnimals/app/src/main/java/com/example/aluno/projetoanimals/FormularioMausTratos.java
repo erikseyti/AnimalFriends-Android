@@ -1,5 +1,7 @@
 package com.example.aluno.projetoanimals;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.example.aluno.projetoanimals.modelo.MausTratos;
 
@@ -99,8 +102,8 @@ public class FormularioMausTratos extends AppCompatActivity {
 
             //inserir o cadastro de maus tratos no banco
       /*  passarDadosWebService(mausTratos.getDescricaoAnimal(),mausTratos.getCidade(),mausTratos.getInformacoesContato(), mausTratos.getLatitude(),mausTratos.getLongitude());*/
-            passarDadosWebService(mausTratos.getDescricaoAnimal(), mausTratos.getCidade(), mausTratos.getInformacoesContato(),
-                    mausTratos.getLatitude(), mausTratos.getLongitude());
+          //  passarDadosWebService(mausTratos.getDescricaoAnimal(), mausTratos.getCidade(), mausTratos.getInformacoesContato(),
+            //        mausTratos.getLatitude(), mausTratos.getLongitude());
             mausTratos.save();
 
             //finaliza a activity de formulario de maus tratos e volta para a lista de maus tratos
@@ -171,6 +174,28 @@ public class FormularioMausTratos extends AppCompatActivity {
         mausTratos.delete();
         // fechar a activity
         finish();
+    }
+
+    public void tirarFoto(View view)
+    {
+        Intent it = new Intent("android.media.action.IMAGE_CAPTURE");
+        startActivityForResult(it, 0);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode,int resultCode, Intent data)
+    {
+        if(data != null)
+        {
+            Bundle bundle= data.getExtras();
+            if(bundle!=null)
+            {
+                Bitmap img= (Bitmap) bundle.get("data");
+
+                ImageView iv = (ImageView) findViewById(R.id.imageViewMausTratos);
+                iv.setImageBitmap(img);
+            }
+        }
     }
 
 }

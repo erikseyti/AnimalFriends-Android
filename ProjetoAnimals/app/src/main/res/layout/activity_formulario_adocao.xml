@@ -211,6 +211,23 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/btn_camera"
+        android:id="@+id/button8"
+        android:onClick="tirarFoto"
+       />
+    />
+
+    <ImageView
+        android:minHeight="120dp"
+        android:minWidth="120dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/imageViewAdocao"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="@string/btn_cadastro_adocao"
         android:id="@+id/button7"
         android:onClick="cadastrarAdocao"/>
