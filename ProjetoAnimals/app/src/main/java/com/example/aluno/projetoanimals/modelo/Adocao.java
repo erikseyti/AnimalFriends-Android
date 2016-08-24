@@ -24,9 +24,12 @@ public class Adocao extends SugarRecord {
     private String linkVideo;
     private String dataCadastro;
     private String cidade;
+    private String fotoAdocao;
 
     public Adocao() {
     }
+
+
 
     public String getNome() {
         return nome;

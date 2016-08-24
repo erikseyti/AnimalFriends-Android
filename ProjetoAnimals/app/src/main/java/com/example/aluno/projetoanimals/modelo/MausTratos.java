@@ -12,8 +12,17 @@ public class MausTratos extends SugarRecord {
     private String cidade;
     private Double latitude;
     private Double longitude;
+    private String fotoMausTratos;
 
     public MausTratos() {
+    }
+
+    public String getFotoMausTratos() {
+        return fotoMausTratos;
+    }
+
+    public void setFotoMausTratos(String fotoMausTratos) {
+        this.fotoMausTratos = fotoMausTratos;
     }
 
     public String getDescricaoAnimal() {

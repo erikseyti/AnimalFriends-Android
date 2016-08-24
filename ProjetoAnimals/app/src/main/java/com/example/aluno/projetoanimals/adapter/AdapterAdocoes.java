@@ -57,6 +57,7 @@ public class AdapterAdocoes extends BaseAdapter {
         TextView textDescricao =(TextView) view.findViewById(R.id.textDescricao);
         TextView textInformacoesA =(TextView) view.findViewById(R.id.textInformacaoContatoA);
 
+
         textNome.setText(adocao.getNome());
         textDescricao.setText(adocao.getDescricao());
         textInformacoesA.setText(adocao.getInformacaoContato());

@@ -2,7 +2,10 @@ package com.example.aluno.projetoanimals;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Environment;
 import android.os.StrictMode;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -15,13 +18,20 @@ import android.widget.TextView;
 
 import com.example.aluno.projetoanimals.modelo.Adocao;
 
+import java.io.File;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 public class FormularioAdocao extends AppCompatActivity {
     Adocao adocao = new Adocao();
+    public static final int MEDIA_TYPE_VIDEO = 2;
+    private Uri fileUri;
+    private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
+    public static final int MEDIA_TYPE_IMAGE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,6 +113,7 @@ public class FormularioAdocao extends AppCompatActivity {
         EditText editIdade=( EditText) findViewById(R.id.editIdade);
         EditText editDataCadastro =(EditText) findViewById(R.id.editDataCadastro);
 
+
         String nomeAnunc = editNomeAnun.getText().toString();
         String informacaoContato = editInform.getText().toString();
         String descricaoAnimal = editDesc.getText().toString();
@@ -139,6 +150,8 @@ public class FormularioAdocao extends AppCompatActivity {
              adocao.setIdade(Integer.parseInt(editIdade.getText().toString()));
              adocao.setPeso(Double.parseDouble(editPeso.getText().toString()));
              adocao.setDataCadastro(editDataCadastro.getText().toString());
+
+
 
            //  passarDadosWebService(adocao.getNome(), adocao.getDescricao(), adocao.getInformacaoContato(), adocao.getCpfAnunciante(),
              //        adocao.getNomeAnunciante(), adocao.getEspecie(), adocao.getSexo(), adocao.getPorte(), adocao.getRaca(), adocao.getCastrado(),
@@ -196,7 +209,25 @@ public class FormularioAdocao extends AppCompatActivity {
     {
         Intent it = new Intent("android.media.action.IMAGE_CAPTURE");
         startActivityForResult(it, 0);
+        startActivityForResult(it, 0);
     }
+
+    public void abrirCamera(View view) {
+        // create Intent to take a picture and return control to the calling application
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+        fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE); // create a file to save the image
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri); // set the image file name
+
+        // start the image capture Intent
+        startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+
+    }
+
+    private static Uri getOutputMediaFileUri(int type) {
+        return Uri.fromFile(getOutputMediaFile(type));
+    }
+
 
     @Override
     protected void onActivityResult(int requestCode,int resultCode, Intent data)
@@ -210,8 +241,49 @@ public class FormularioAdocao extends AppCompatActivity {
 
                 ImageView iv = (ImageView) findViewById(R.id.imageViewAdocao);
                 iv.setImageBitmap(img);
+
+
+
             }
         }
     }
 
+
+    private static File getOutputMediaFile(int type) {
+        // To be safe, you should check that the SDCard is mounted
+        // using Environment.getExternalStorageState() before doing this.
+
+        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_PICTURES), "MyCameraApp");
+        // This location works best if you want the created images to be shared
+        // between applications and persist after your app has been uninstalled.
+
+        // Create the storage directory if it does not exist
+        if (!mediaStorageDir.exists()) {
+            if (!mediaStorageDir.mkdirs()) {
+                Log.d("MyCameraApp", "failed to create directory");
+                return null;
+            }
+        }
+        // Create a media file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        File mediaFile;
+        if (type == MEDIA_TYPE_IMAGE) {
+            mediaFile = new File(mediaStorageDir.getPath() + File.separator +
+                    "IMG_" + timeStamp + ".jpg");
+        } else if (type == MEDIA_TYPE_VIDEO) {
+            mediaFile = new File(mediaStorageDir.getPath() + File.separator +
+                    "VID_" + timeStamp + ".mp4");
+        } else {
+            return null;
+        }
+
+        return mediaFile;
+    }
+
+
 }
+
+
+
+

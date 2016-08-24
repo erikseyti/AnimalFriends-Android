@@ -53,6 +53,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="CPF Anunciante"
+        android:inputType="number"
         android:id="@+id/textView7" />
 
     <EditText
@@ -117,7 +118,8 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editPeso" />
+        android:id="@+id/editPeso"
+        android:inputType="number"/>
 
     <TextView
         android:layout_width="wrap_content"
