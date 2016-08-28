@@ -151,8 +151,7 @@ public class FormularioAdocao extends AppCompatActivity {
              adocao.setPeso(Double.parseDouble(editPeso.getText().toString()));
              adocao.setDataCadastro(editDataCadastro.getText().toString());
 
-
-
+             // Criada para Passar os parametros da classe Adocao para o Web Service
            //  passarDadosWebService(adocao.getNome(), adocao.getDescricao(), adocao.getInformacaoContato(), adocao.getCpfAnunciante(),
              //        adocao.getNomeAnunciante(), adocao.getEspecie(), adocao.getSexo(), adocao.getPorte(), adocao.getRaca(), adocao.getCastrado(),
                //      adocao.getLinkVideo(), adocao.getCidade(), adocao.getIdade(), adocao.getPeso(), adocao.getPelagem(), adocao.getDataCadastro());
@@ -271,10 +270,8 @@ public class FormularioAdocao extends AppCompatActivity {
         if (type == MEDIA_TYPE_IMAGE) {
             mediaFile = new File(mediaStorageDir.getPath() + File.separator +
                     "IMG_" + timeStamp + ".jpg");
-        } else if (type == MEDIA_TYPE_VIDEO) {
-            mediaFile = new File(mediaStorageDir.getPath() + File.separator +
-                    "VID_" + timeStamp + ".mp4");
-        } else {
+        }
+        else {
             return null;
         }
 
