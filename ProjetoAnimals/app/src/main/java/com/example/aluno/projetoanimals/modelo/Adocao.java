@@ -8,7 +8,7 @@ import java.util.Date;
  * Created by Aluno on 16/06/2016.
  */
 public class Adocao extends SugarRecord {
-    private String nome;
+    private String nomeAnimal;
     private String cpfAnunciante;
     private String descricao;
     private String nomeAnunciante;
@@ -32,11 +32,11 @@ public class Adocao extends SugarRecord {
 
 
     public String getNome() {
-        return nome;
+        return nomeAnimal;
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        this.nomeAnimal = nome;
     }
 
     public String getCpfAnunciante() {
